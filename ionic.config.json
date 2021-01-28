@@ -1,0 +1,7 @@
+{
+  "name": "StarTrack-vue",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
