@@ -15,40 +15,49 @@
           </ion-header>
           <ion-list lines="none">
             <ion-menu-toggle auto-hide="false">
-              <ion-item router-link="/browse" router-direction="root">
+              <ion-item
+                router-link="/browse"
+                router-direction="root"
+                :class="{ selected: isActive('browse') }"
+              >
                 <ion-icon :icon="musicalNotes" slot="start"></ion-icon>
                 Browse
               </ion-item>
             </ion-menu-toggle>
 
             <ion-menu-toggle auto-hide="false">
-              <ion-item router-link="/search" router-direction="root">
+              <ion-item
+                router-link="/search"
+                router-direction="root"
+                :class="{ selected: isActive('search') }"
+              >
                 <ion-icon :icon="search" slot="start"></ion-icon>
                 Search
               </ion-item>
             </ion-menu-toggle>
 
+            <ion-menu-toggle autoHide="false" v-if="isAuthorized">
+              <ion-item @click="logout()" lines="none" button="true">
+                <ion-icon slot="start" :icon="logOutIcon"></ion-icon>
+                Log Out
+              </ion-item>
+            </ion-menu-toggle>
 
-                <ion-menu-toggle autoHide="false" v-if="isAuthorized">
-                  <ion-item @click="logout()" lines="none" button="true">
-                    <ion-icon slot="start" :icon="logOutIcon"></ion-icon>
-                    Log Out
-                  </ion-item>
-                </ion-menu-toggle>
-
-                <ion-menu-toggle autoHide="false" v-else>
-                  <ion-item @click="login()" lines="none" button="true">
-                    <ion-icon slot="start" :icon="logInIcon"></ion-icon>
-                    Log In
-                  </ion-item>
-                </ion-menu-toggle>
-
+            <ion-menu-toggle autoHide="false" v-else>
+              <ion-item @click="login()" lines="none" button="true">
+                <ion-icon slot="start" :icon="logInIcon"></ion-icon>
+                Log In
+              </ion-item>
+            </ion-menu-toggle>
           </ion-list>
         </ion-content>
       </ion-menu>
-      <ion-router-outlet id="main-content" />
+
+      <div id="main-content" class="route-wrapper">
+        <ion-router-outlet />
+        <track-player />
+      </div>
     </ion-split-pane>
-    <track-player></track-player>
   </ion-app>
 </template>
 
@@ -66,11 +75,16 @@ import {
   IonList,
   IonHeader,
   IonToolbar,
-
 } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
 import TrackPlayer from './components/TrackPlayer.vue';
-import { musicalNotes, search, logIn as logInIcon, logOut as logOutIcon } from 'ionicons/icons';
+import {
+  musicalNotes,
+  search,
+  logIn as logInIcon,
+  logOut as logOutIcon,
+} from 'ionicons/icons';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'App',
@@ -94,18 +108,34 @@ export default defineComponent({
     const mkEvents = (window as any).MusicKit.Events;
     const isAuthorized = ref(mkInstance.isAuthorized);
     const menu = ref<HTMLIonMenuElement>();
+    const route = useRoute();
 
-    const authDidChange = () => isAuthorized.value = mkInstance.isAuthorized;
+    const authDidChange = () => (isAuthorized.value = mkInstance.isAuthorized);
 
-    const login = () => mkInstance.authorize()
+    const login = () => mkInstance.authorize();
 
     const logout = async () => {
       await mkInstance.unauthorize();
       menu.value?.close();
-    }
-
-    mkInstance.addEventListener(mkEvents.authorizationStatusDidChange, authDidChange);
-    return { search, musicalNotes, login, logout, logInIcon, logOutIcon, isAuthorized};
+    };
+    const isActive = (path) => {
+      // let isActive = route.name
+      return path === route.name;
+    };
+    mkInstance.addEventListener(
+      mkEvents.authorizationStatusDidChange,
+      authDidChange
+    );
+    return {
+      search,
+      musicalNotes,
+      login,
+      logout,
+      logInIcon,
+      logOutIcon,
+      isAuthorized,
+      isActive,
+    };
   },
 });
 </script>

@@ -25,7 +25,7 @@
           </template>
           <template v-else>
             <album-item
-              v-for="item of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+              v-for="item of Array(20)"
               :key="item"
             ></album-item>
           </template>
@@ -49,7 +49,7 @@
           </template>
           <template v-else>
             <album-item
-              v-for="item of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+              v-for="item of Array(20)"
               :key="item"
             ></album-item>
           </template>
@@ -80,7 +80,7 @@
           </template>
           <template v-else>
             <song-item
-              v-for="item of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+              v-for="item of Array(20)"
               :key="item"
             />
           </template>

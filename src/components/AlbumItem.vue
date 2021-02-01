@@ -10,10 +10,18 @@
 
     <ion-label>
       <template v-if="collection">
-      <h3><span class="index">{{ index + 1 }}</span> {{ collection.attributes.name }} <span class="rating" v-if="collection.attributes.contentRating === 'explicit'" >E</span> </h3>
-      <ion-note>
-        <p>{{ collection.attributes.artistName }}</p>
-      </ion-note>
+        <h3>
+          <span class="index">{{ index + 1 }}</span>
+          {{ collection.attributes.name }}
+          <span
+            class="rating"
+            v-if="collection.attributes.contentRating === 'explicit'"
+            >E</span
+          >
+        </h3>
+        <ion-note>
+          <p>{{ collection.attributes.artistName }}</p>
+        </ion-note>
       </template>
       <template v-else>
         <h3><ion-skeleton-text :animated="true" style="width: 88%" /></h3>

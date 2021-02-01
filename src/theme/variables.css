@@ -193,3 +193,26 @@ ion-range::part(knob) {
 a {
   text-decoration: none;
 }
+
+
+div.route-wrapper {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  contain: layout size style;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.split-pane-visible .split-pane-main {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: relative;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  z-index: 0;
+}
