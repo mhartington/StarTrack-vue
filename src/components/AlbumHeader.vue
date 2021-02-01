@@ -4,7 +4,7 @@
     :style="{
       backgroundImage:
         'url(' +
-        useFormatArtwork(collection?.attributes.artwork.url, 1000) +
+        (collection ? useFormatArtwork(collection.attributes.artwork.url, 1000) : '' ) +
         ')',
     }"
   >
