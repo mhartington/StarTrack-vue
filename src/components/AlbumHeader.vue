@@ -130,6 +130,7 @@ export default defineComponent({
 }
 .artwork-header {
   display: flex;
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   overflow: hidden;
   height: 300px;

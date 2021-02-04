@@ -151,7 +151,7 @@ function queuePositionDidChange(event: any): void {
   internalState.queuePosition = event.position + 1;
 }
 
-export async function setQueueFromItems( items: any[], startPosition = 0, shuffle = false) {
+export async function setQueueFromItems( items: any, startPosition = 0, shuffle = false) {
   if (shuffle) {
     items = items.sort(() => 0.5 - Math.random());
   }

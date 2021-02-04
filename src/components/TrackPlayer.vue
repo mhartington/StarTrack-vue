@@ -16,10 +16,12 @@
       </div>
 
       <ion-range
-        step="1"
-        min="0"
-        :value="getPlayerVal()"
+        :step="1"
+        :min="0"
+        v-model="playerVal"
         :max="playbackDuration"
+        @pointerdown="onPointerDown($event)"
+        @pointerup="onPointerUp($event)"
         :disabled="
           playbackDuration === 0 ||
           playbackState === playerStateEnum.NONE ||
@@ -28,10 +30,6 @@
           playbackState === playerStateEnum.WAITING ||
           playbackState === playerStateEnum.STALLED
         "
-        @mousedown="onPointerDown()"
-        @mouseup="onPointerUp($event)"
-        @touchstart="onPointerDown()"
-        @touchend="onPointerUp($event)"
       ></ion-range>
       <ion-buttons class="song-actions">
         <ion-button
@@ -77,7 +75,7 @@
   </ion-footer>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import {
   IonRange,
   IonIcon,
@@ -115,25 +113,22 @@ export default defineComponent({
   },
   setup() {
     const playerStateEnum = PlaybackStates;
-    const scubVal = ref(0);
-    const isScrubbing = ref(false);
+    let isScrubbing = false;
 
-    const getPlayerVal = () => {
-      if (isScrubbing.value) {
-        return scubVal.value;
-      } else {
-        return state.playbackTime.value;
-      }
-    };
+    const playerVal = ref(0);
     const onPointerUp = async (event: any) => {
       await seekToTime(event.target.value);
-      isScrubbing.value = false;
-      getPlayerVal();
+      isScrubbing = false;
     };
-    const onPointerDown = () => {
-      isScrubbing.value = true;
-      scubVal.value = state.playbackTime.value;
+    const onPointerDown = (event) => {
+      isScrubbing = true;
+      playerVal.value = event.target.value;
     };
+    watch(state.playbackTime, (newVal) => {
+      if (!isScrubbing) {
+        playerVal.value = newVal;
+      }
+    });
     const stopProp = (event: Event) => {
       event.stopPropagation();
     };
@@ -165,7 +160,7 @@ export default defineComponent({
       playerStateEnum,
       onPointerDown,
       onPointerUp,
-      getPlayerVal,
+      playerVal,
       ...state,
     };
   },

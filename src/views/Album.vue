@@ -14,7 +14,7 @@
     <ion-content>
       <album-header
         :collection="state.collection"
-        @playCollection="handlePlayCollection($event)"
+        @playCollection="playSong(0, $event)"
       />
       <template v-if="state.collection">
         <song-item
@@ -75,8 +75,9 @@ export default defineComponent({
     });
     const route = useRoute();
     const playSong = (index: number, shuffle = false) => {
+      const songs = state.value.collection.relationships.tracks.data
       setQueueFromItems(
-        state.value.collection.relationships.tracks.data,
+        songs,
         index,
         shuffle
       );
@@ -86,10 +87,7 @@ export default defineComponent({
       const res = await fetchAlbumOrPlaylist(id as string, type as string);
       state.value = { collection: res, isLoading: false, hasError: false };
     };
-    const handlePlayCollection = (shouldShuffle: boolean) => {
-      console.log('event val', shouldShuffle);
-    };
-    return { state, playSong, handlePlayCollection, loadCollection };
+    return { state, playSong, loadCollection };
   },
 });
 </script>
