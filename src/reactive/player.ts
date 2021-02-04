@@ -141,8 +141,9 @@ function playbackStateDidChange({state}) {
   //   );
   // }
 }
-function mediaPlaybackError(event: any): void {
-  console.log('mediaPlayBackError', event);
+//event: any
+function mediaPlaybackError(): void {
+  throw new Error('mediaPlayBackError');
 }
 function queueItemsDidChange(e: any): void {
   internalState.queue = e;
