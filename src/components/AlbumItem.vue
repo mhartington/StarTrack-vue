@@ -3,7 +3,7 @@
     <ion-card>
       <img
         :src="useFormatArtwork(collection?.attributes.artwork.url, 200)"
-        alt="album artwork"
+        alt="Album artwork"
         loading="lazy"
       />
     </ion-card>

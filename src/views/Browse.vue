@@ -72,7 +72,7 @@
               <ion-thumbnail slot="start">
                 <img
                   :src="useFormatArtwork(song.attributes.artwork.url, 60)"
-                  alt=""
+                  alt="Artwork for Track"
                   loading="lazy"
                 />
               </ion-thumbnail>

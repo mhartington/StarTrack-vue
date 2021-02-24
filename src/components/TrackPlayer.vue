@@ -1,5 +1,5 @@
 <template>
-  <ion-footer class="mh-footer" translucent="true">
+  <ion-footer class="mh-footer" translucent="true" @click="openPlayerModal()">
     <div class="track-player">
       <div class="song-info">
         <ion-thumbnail>
@@ -20,15 +20,16 @@
         :min="0"
         v-model="playerVal"
         :max="playbackDuration"
+        @click="stopProp($event)"
         @pointerdown="onPointerDown($event)"
         @pointerup="onPointerUp($event)"
         :disabled="
           playbackDuration === 0 ||
-          playbackState === playerStateEnum.NONE ||
-          playbackState === playerStateEnum.LOADING ||
-          playbackState === playerStateEnum.ENDED ||
-          playbackState === playerStateEnum.WAITING ||
-          playbackState === playerStateEnum.STALLED
+            playbackState === playerStateEnum.NONE ||
+            playbackState === playerStateEnum.LOADING ||
+            playbackState === playerStateEnum.ENDED ||
+            playbackState === playerStateEnum.WAITING ||
+            playbackState === playerStateEnum.STALLED
         "
       ></ion-range>
       <ion-buttons class="song-actions">
@@ -50,9 +51,9 @@
           <ion-spinner
             v-if="
               playbackState === playerStateEnum.LOADING ||
-              playbackState === playerStateEnum.ENDED ||
-              playbackState === playerStateEnum.WAITING ||
-              playbackState === playerStateEnum.STALLED
+                playbackState === playerStateEnum.ENDED ||
+                playbackState === playerStateEnum.WAITING ||
+                playbackState === playerStateEnum.STALLED
             "
           >
           </ion-spinner>
@@ -75,7 +76,7 @@
   </ion-footer>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref, watch } from "vue";
 import {
   IonRange,
   IonIcon,
@@ -86,8 +87,10 @@ import {
   IonLabel,
   IonButtons,
   IonSpinner,
-} from '@ionic/vue';
-import { playBack, play, pause, playForward } from 'ionicons/icons';
+  modalController,
+} from "@ionic/vue";
+import { playBack, play, pause, playForward } from "ionicons/icons";
+import PlayerModal from "./PlayerModal.vue";
 import {
   playerState as state,
   PlaybackStates,
@@ -96,10 +99,10 @@ import {
   skipToNextItem,
   skipToPreviousItem,
   seekToTime,
-} from '../reactive/player';
+} from "../reactive/player";
 
 export default defineComponent({
-  name: 'TrackPlayer',
+  name: "TrackPlayer",
   components: {
     IonNote,
     IonThumbnail,
@@ -116,11 +119,16 @@ export default defineComponent({
     let isScrubbing = false;
 
     const playerVal = ref(0);
+    const stopProp = (event: Event) => {
+      event.stopPropagation();
+    };
     const onPointerUp = async (event: any) => {
+      stopProp(event);
       await seekToTime(event.target.value);
       isScrubbing = false;
     };
-    const onPointerDown = (event) => {
+    const onPointerDown = (event: any) => {
+      stopProp(event);
       isScrubbing = true;
       playerVal.value = event.target.value;
     };
@@ -129,24 +137,31 @@ export default defineComponent({
         playerVal.value = newVal;
       }
     });
-    const stopProp = (event: Event) => {
-      event.stopPropagation();
-    };
-    const next = async (event) => {
+    const next = async (event: any) => {
       stopProp(event);
       await skipToNextItem();
     };
-    const prev = async (event) => {
+    const prev = async (event: any) => {
       stopProp(event);
       await skipToPreviousItem();
     };
-    const togglePlay = async (event) => {
+    const togglePlay = async (event: any) => {
       stopProp(event);
       if (state.playbackState.value === playerStateEnum.PAUSED) {
-        mkPlay();
+        await mkPlay();
       } else {
-        mkPause();
+        await mkPause();
       }
+    };
+
+    const openPlayerModal = async () => {
+      const modal = await modalController.create({
+        component: PlayerModal,
+        swipeToClose: false,
+        cssClass: "full-modal",
+      });
+      await modal.present();
+      console.log("should open modal");
     };
     return {
       stopProp,
@@ -161,6 +176,7 @@ export default defineComponent({
       onPointerDown,
       onPointerUp,
       playerVal,
+      openPlayerModal,
       ...state,
     };
   },

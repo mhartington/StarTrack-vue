@@ -51,6 +51,7 @@ let mkEvents: any;
 let mkPlayerInst: any;
 
 globalThis?.document.addEventListener('musickitloaded', () => {
+  console.log('on musickit loaded')
   mkInstance = (window as any).MusicKit.getInstance();
   mkEvents = (window as any).MusicKit.Events;
   mkPlayerInst = mkInstance.player;
@@ -163,14 +164,14 @@ export async function setQueueFromItems( items: any, startPosition = 0, shuffle 
   await mkInstance.setQueue({ items: newItems });
   await mkInstance.changeToMediaAtIndex(startPosition);
 }
-export async function play() {
-  await mkPlayerInst.play();
+export function play() {
+  return mkPlayerInst.play();
 }
-export async function pause() {
-  await mkPlayerInst.pause();
+export function pause() {
+ return mkPlayerInst.pause();
 }
-export async function stop() {
-  await mkPlayerInst.stop();
+export  function stop() {
+  return mkPlayerInst.stop();
 }
 export function toggleRepeat(): void {
   const nextRepeatMode = (mkPlayerInst.repeatMode + 1) % 3;
