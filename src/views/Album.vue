@@ -75,7 +75,7 @@ export default defineComponent({
     });
     const route = useRoute();
     const playSong = (index: number, shuffle = false) => {
-      const songs = state.value.collection.relationships.tracks.data
+      const songs = [...state.value.collection.relationships.tracks.data]
       setQueueFromItems(
         songs,
         index,

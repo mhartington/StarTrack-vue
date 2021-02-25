@@ -161,7 +161,6 @@ export default defineComponent({
         cssClass: "full-modal",
       });
       await modal.present();
-      console.log("should open modal");
     };
     return {
       stopProp,

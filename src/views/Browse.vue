@@ -145,7 +145,8 @@ export default defineComponent({
       };
     };
     const playSongs = (idx: number) => {
-      setQueueFromItems(state.value.topSongs, idx);
+      const songs = [...state.value.topSongs]
+      setQueueFromItems(songs, idx);
     };
     return { state, useFormatArtwork, playSongs, fetchTopCharts };
   },
