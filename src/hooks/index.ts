@@ -3,8 +3,8 @@ import { watch, WatchOptions } from 'vue';
 const isFunction = (f: any) => typeof f === 'function';
 
 export function useFormatArtwork(url: string, dim: number) {
-  if(!url){
-    return '/assets/imgs/default.jpeg'
+  if (!url) {
+    return '/assets/imgs/default.jpeg';
   }
   return url.replace(/\{w\}|\{h\}/g, dim.toString());
 }
@@ -29,15 +29,16 @@ export function useMsToMins(dur: number) {
   return durationFromMsHelper(dur);
 }
 
-export function useTimeFormat(dur: number){
-  const { hours, minutes } = (window as any).MusicKit.formattedMilliseconds(dur);
+export function useTimeFormat(dur: number) {
+  const { hours, minutes } = (window as any).MusicKit.formattedMilliseconds(
+    dur
+  );
   const hourTime = hours === 0 ? `` : `${hours} hours, `;
   const minutesTime = `${minutes} minutes`;
   return `${hourTime} ${minutesTime} `;
 }
 
-
-export const useEffect = (effectHandler: Function, dependencies: any[]) => {
+export function useEffect(effectHandler: Function, dependencies: any[]) {
   return watch(
     dependencies,
     (changedDependencies, prevDependencies, onCleanUp) => {
@@ -51,7 +52,12 @@ export const useEffect = (effectHandler: Function, dependencies: any[]) => {
     },
     { immediate: true, deep: true } as WatchOptions
   );
-};
+}
 
-
-// export function useMKEvents(){};
+export function debounce(fn: Function, ms = 300) {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return function (this: any, ...args: any[]) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), ms);
+  };
+}

@@ -120,7 +120,6 @@ export default defineComponent({
   },
 });
 </script>
-
 <style scoped>
 .album-header {
   background-repeat: no-repeat no-repeat;

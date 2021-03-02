@@ -7,8 +7,8 @@ module.exports = {
       .rule('vue')
       .use('vue-loader')
       .tap((args) => {
-        args.hotReload = false
-        return args
+        args.hotReload = false;
+        return args;
       });
   },
   devServer: {

@@ -140,7 +140,7 @@ export default defineComponent({
 });
 </script>
 
-<style scope>
+<style scoped>
 /* ion-footer.mh-footer {                    */
 /*   position: absolute;                     */
 /*   bottom: 0;                              */

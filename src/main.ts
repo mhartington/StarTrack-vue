@@ -8,7 +8,6 @@ import '@ionic/vue/css/ionic.bundle.css';
 import './theme/variables.css';
 
 function setupMusicKit() {
-  console.log('configured');
   (window as any).MusicKit.configure({
     developerToken: process.env.VUE_APP_MUSICKIT_TOKEN,
     app: {
@@ -19,8 +18,5 @@ function setupMusicKit() {
 }
 setupMusicKit();
 
-
 const app = createApp(App).use(IonicVue).use(router);
-router
-  .isReady()
-  .then(() => app.mount('#app'))
+router.isReady().then(() => app.mount('#app'));

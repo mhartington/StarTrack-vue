@@ -26,3 +26,17 @@ export function fetchAlbumOrPlaylist(id: string, type: string) {
     return fetchAlbum(id);
   }
 }
+
+export function search(query: string): Promise<any> {
+  const searchTypes = ['songs', 'albums', 'playlists'];
+  return mkInstance.api
+    .search(query, {
+      types: searchTypes,
+      limit: 50,
+    })
+    .then((res: any) => ({
+      albums: res?.albums.data,
+      songs: res?.songs?.data ?? null,
+      playlists: res?.playlists?.data ?? null,
+    }));
+}

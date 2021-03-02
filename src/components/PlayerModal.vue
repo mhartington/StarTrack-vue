@@ -266,12 +266,18 @@ ion-header .dismisser {
   width: 100%;
   padding: 16px;
 }
+.track-wrapper .track-player .song-info ion-label {
+
+  display: block;
+  padding-top: 16px;
+}
 .track-wrapper .track-player .song-info ion-label * {
   font-size: 2em;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 16px;
 }
 .track-wrapper .track-player .song-info ion-thumbnail {
   width: 100%;
@@ -286,6 +292,7 @@ ion-header .dismisser {
   border-radius: 15px;
   overflow: hidden;
 }
+
 .track-wrapper .player-queue {
   max-width: 100%;
   display: block;
@@ -319,6 +326,7 @@ ion-header .dismisser {
     width: 100%;
     margin: 0 auto;
   }
+
   .track-wrapper .track-player ion-range {
     padding: 0;
   }
