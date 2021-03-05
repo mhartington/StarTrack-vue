@@ -101,6 +101,7 @@ import {
   IonListHeader,
   IonButtons,
   IonMenuButton,
+  onIonViewDidEnter
 } from '@ionic/vue';
 import { RouterLink } from 'vue-router';
 import { useFormatArtwork } from '../hooks';
@@ -125,9 +126,6 @@ export default defineComponent({
     IonButtons,
     IonMenuButton,
   },
-  ionViewDidEnter() {
-    this.fetchTopCharts();
-  },
   setup() {
     const state = ref({
       topAlbums: [],
@@ -135,7 +133,8 @@ export default defineComponent({
       topSongs: [],
       isLoading: true,
     });
-    const fetchTopCharts = async () => {
+
+    onIonViewDidEnter(async () => {
       const { songs, albums, playlists } = await fetchChart();
       state.value = {
         topAlbums: albums,
@@ -143,12 +142,12 @@ export default defineComponent({
         topSongs: songs,
         isLoading: false,
       };
-    };
+    });
     const playSongs = (idx: number) => {
       const songs = [...state.value.topSongs]
       setQueueFromItems(songs, idx);
     };
-    return { state, useFormatArtwork, playSongs, fetchTopCharts };
+    return { state, useFormatArtwork, playSongs };
   },
 });
 </script>

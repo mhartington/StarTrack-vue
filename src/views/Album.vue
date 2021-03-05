@@ -46,6 +46,7 @@ import {
   IonBackButton,
   IonButtons,
   IonTitle,
+  onIonViewDidEnter
 } from '@ionic/vue';
 import { setQueueFromItems } from '@/reactive/player';
 export default defineComponent({
@@ -59,9 +60,6 @@ export default defineComponent({
     IonBackButton,
     IonButtons,
     IonTitle,
-  },
-  ionViewDidEnter() {
-    this.loadCollection();
   },
   setup() {
     const state = ref<{
@@ -82,12 +80,12 @@ export default defineComponent({
         shuffle
       );
     };
-    const loadCollection = async () => {
+    onIonViewDidEnter(async () => {
       const { type, id } = route.params;
       const res = await fetchAlbumOrPlaylist(id as string, type as string);
       state.value = { collection: res, isLoading: false, hasError: false };
-    };
-    return { state, playSong, loadCollection };
+    });
+    return { state, playSong };
   },
 });
 </script>

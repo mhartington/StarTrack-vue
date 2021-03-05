@@ -18,7 +18,6 @@
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "plugins": [
-      { "name": "@vuedx/typescript-plugin-vue" },
       { "name": "typescript-eslint-language-service" }
     ]
   },

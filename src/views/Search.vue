@@ -165,7 +165,7 @@ export default defineComponent({
         return search(term)
           .then((res) => setSuccessState(res))
           .catch(() => setErrorState());
-      }, 1000)
+      }, 750)
     );
 
     const playSong = (idx: number) => {

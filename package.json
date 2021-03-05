@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@capacitor/core": "2.4.3",
-    "@ionic/vue": "^5.5.5",
-    "@ionic/vue-router": "^5.5.5",
+    "@ionic/vue": "^5.6.0",
+    "@ionic/vue-router": "^5.6.0",
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
-    "vue": "^3.0.0",
+    "vue": "^3.0.7",
     "vue-router": "^4.0.4"
   },
   "devDependencies": {
