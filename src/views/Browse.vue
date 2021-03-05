@@ -24,10 +24,7 @@
             </router-link>
           </template>
           <template v-else>
-            <album-item
-              v-for="item of Array(20)"
-              :key="item"
-            ></album-item>
+            <album-item v-for="item of 20" :key="item"></album-item>
           </template>
         </div>
       </ion-list>
@@ -48,10 +45,7 @@
             </router-link>
           </template>
           <template v-else>
-            <album-item
-              v-for="item of Array(20)"
-              :key="item"
-            ></album-item>
+            <album-item v-for="item of 20" :key="item"></album-item>
           </template>
         </div>
       </ion-list>
@@ -79,10 +73,7 @@
             </song-item>
           </template>
           <template v-else>
-            <song-item
-              v-for="item of Array(20)"
-              :key="item"
-            />
+            <song-item v-for="item of 20" :key="item" />
           </template>
         </div>
       </ion-list>
@@ -101,7 +92,7 @@ import {
   IonListHeader,
   IonButtons,
   IonMenuButton,
-  onIonViewDidEnter
+  onIonViewDidEnter,
 } from '@ionic/vue';
 import { RouterLink } from 'vue-router';
 import { useFormatArtwork } from '../hooks';
@@ -144,7 +135,7 @@ export default defineComponent({
       };
     });
     const playSongs = (idx: number) => {
-      const songs = [...state.value.topSongs]
+      const songs = [...state.value.topSongs];
       setQueueFromItems(songs, idx);
     };
     return { state, useFormatArtwork, playSongs };
