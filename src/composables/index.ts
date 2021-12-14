@@ -38,7 +38,7 @@ export function useTimeFormat(dur: number) {
   return `${hourTime} ${minutesTime} `;
 }
 
-export function useEffect(effectHandler: Function, dependencies: any[]) {
+export function useEffect(effectHandler: any, dependencies: any[]) {
   return watch(
     dependencies,
     (changedDependencies, prevDependencies, onCleanUp) => {
@@ -54,7 +54,7 @@ export function useEffect(effectHandler: Function, dependencies: any[]) {
   );
 }
 
-export function debounce(fn: Function, ms = 300) {
+export function debounce(fn: any, ms = 300) {
   let timeoutId: ReturnType<typeof setTimeout>;
   return function (this: any, ...args: any[]) {
     clearTimeout(timeoutId);

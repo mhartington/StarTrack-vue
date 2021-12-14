@@ -106,7 +106,7 @@ import {
 } from "@ionic/vue";
 import SongItem from "../components/SongItem.vue";
 import { defineComponent, ref, onMounted, watch } from "vue";
-import { useFormatArtwork, debounce } from "@/hooks";
+import { useFormatArtwork, debounce } from "@/composables";
 import { useRouter, useRoute } from "vue-router";
 import { search } from "@/services/musickit";
 import { setQueueFromItems } from "@/reactive/player";

@@ -107,7 +107,7 @@ export default defineComponent({
     const mkInstance = (window as any).MusicKit.getInstance();
     const mkEvents = (window as any).MusicKit.Events;
     const isAuthorized = ref(mkInstance.isAuthorized);
-    const menu = ref<HTMLIonMenuElement>();
+    const menu = ref();
     const route = useRoute();
 
     const authDidChange = () => (isAuthorized.value = mkInstance.isAuthorized);
@@ -118,7 +118,7 @@ export default defineComponent({
       await mkInstance.unauthorize();
       menu.value?.close();
     };
-    const isActive = (path) => {
+    const isActive = (path: string) => {
       // let isActive = route.name
       return path === route.name;
     };

@@ -95,7 +95,7 @@ import {
   onIonViewDidEnter,
 } from '@ionic/vue';
 import { RouterLink } from 'vue-router';
-import { useFormatArtwork } from '../hooks';
+import { useFormatArtwork } from '../composables';
 import { defineComponent, ref } from 'vue';
 import AlbumItem from '../components/AlbumItem.vue';
 import SongItem from '../components/SongItem.vue';

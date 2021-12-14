@@ -32,7 +32,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useMsToMins } from '../hooks';
+import { useMsToMins } from '../composables';
 import { IonItem, IonNote, IonText, IonLabel, IonSkeletonText } from '@ionic/vue';
 export default defineComponent({
   name: 'SongItem',

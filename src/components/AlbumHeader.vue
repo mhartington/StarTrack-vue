@@ -80,7 +80,7 @@
 import { IonButton, IonIcon, IonText, IonSkeletonText } from '@ionic/vue';
 import { ellipsisVertical, shuffle, play } from 'ionicons/icons';
 import { defineComponent, ref, watch } from 'vue';
-import { useFormatArtwork, useTimeFormat } from '../hooks';
+import { useFormatArtwork, useTimeFormat } from '../composables';
 export default defineComponent({
   name: 'AlbumHeader',
   components: { IonSkeletonText, IonButton, IonIcon, IonText },

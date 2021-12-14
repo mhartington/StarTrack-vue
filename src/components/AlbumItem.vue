@@ -32,7 +32,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useFormatArtwork } from '../hooks';
+import { useFormatArtwork } from '../composables';
 import { IonCard, IonLabel, IonNote, IonSkeletonText } from '@ionic/vue';
 export default defineComponent({
   name: 'AlbumItem',

@@ -29,7 +29,6 @@ import {
   IonIcon,
 } from '@ionic/vue';
 export default defineComponent({
-  name: 'Landing',
   components: {
     IonHeader,
     IonToolbar,

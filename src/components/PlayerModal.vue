@@ -119,7 +119,7 @@ import {
   IonSpinner,
 } from '@ionic/vue';
 
-import { useFormatArtwork } from '../hooks';
+import { useFormatArtwork } from '../composables';
 import SongItem from '../components/SongItem.vue';
 import SvgBars from '../components/SvgBars.vue';
 import {

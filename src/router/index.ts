@@ -4,21 +4,21 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    component: () => import('../views/Landing.vue'),
+    component: () => import('../views/LandingPage.vue'),
   },
   {
     path: '/browse',
     name: 'browse',
-    component: () => import('../views/Browse.vue'),
+    component: () => import('../views/BrowsePage.vue'),
   },
   {
     path: '/search',
     name: 'search',
-    component: () => import('../views/Search.vue'),
+    component: () => import('../views/SearchPage.vue'),
   },
   {
     path: '/:type/:id',
-    component: () => import('../views/Album.vue'),
+    component: () => import('../views/AlbumPage.vue'),
   },
 ];
 
