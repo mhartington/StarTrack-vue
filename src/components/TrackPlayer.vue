@@ -31,7 +31,7 @@
             playbackState === playerStateEnum.WAITING ||
             playbackState === playerStateEnum.STALLED
         "
-      ></ion-range>
+        ></ion-range>
       <ion-buttons class="song-actions">
         <ion-button
           shape="round"

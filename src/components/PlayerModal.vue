@@ -239,7 +239,7 @@ ion-header .dismisser {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100%;
+  height: calc(100% - 100px);
 }
 .track-wrapper .track-player .song-actions {
   flex: initial;

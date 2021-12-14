@@ -14,10 +14,10 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 1 : 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 1 : 0,
-    'vue/no-deprecated-slot-attribute': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-use-before-define': 0,
-    '@typescript-eslint/no-empty-function': 0
+    'vue/no-deprecated-slot-attribute': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/no-empty-function': 'off'
   },
   overrides: [
     {
